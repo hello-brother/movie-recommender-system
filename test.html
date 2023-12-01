@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Jolly Block</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+<body>
+    <py-script>
+        from pyspark.sql import SparkSession
+        from pyspark.sql.functions import col
+        spark = SparkSession.builder.appName("ratings_matrix").getOrCreate()
+
+        data = spark.createDataFrame([
+            (1, 101, 5), (1, 102, 4),
+            (2, 101, 4),
+            (3, 101, 2), (3, 102, 3), (3, 103, 4),
+            (4, 101, 5),
+            (5, 104, 3), (5, 105, 4),
+            (6, 101, 4), (6, 103, 4),
+            (7, 102, 4),
+            (8, 101, 4), (8, 102, 3), (8, 103, 4), (8, 104, 2), (8, 105, 3),
+            (9, 101, 2), (9, 102, 3), (9, 103, 4), (9, 104, 5), (9, 105, 4),
+            (10, 101, 5), (10, 102, 2), (10, 103, 1), (10, 104, 4), (10, 105, 5)
+        ], ["userId", "movieId", "rating"])
+
+        ratings_matrix = data.groupBy("userId").pivot("movieId").agg({"rating": "first"})
+        ratings_matrix = ratings_matrix.na.fill(0)
+        ratings_matrix.show()
+    </py-script>
+</body>
+</html>

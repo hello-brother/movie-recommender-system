@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie-recommendation-system</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>MovieFlix</h1>
+            <nav>
+                <ul>
+                    <li><a href="#movieContainer">Home</a></li>
+                    <li><a href="#genres">Genres</a></li>
+                    <li><a href="#favorites">Favorites</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="index.html">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <div class="profile" id="userEmail"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="movieContainer">
+        <!-- Movie cards will be dynamically added here -->
+    </div>
+    <script>
+        // index3.html
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve the email from local storage
+            var userEmail = localStorage.getItem("userEmail");
+
+            // Display the email on the page
+            if (userEmail) {
+                document.getElementById("userEmail").textContent = userEmail;
+            }
+        });
+
+    </script>
+     
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie-recommendation-system</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.8.4/firebase-auth-compat.js"></script>
+    
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>MovieFlix</h1>
+            <nav>
+                <ul>
+                    <li><a href="#movieContainer">Home</a></li>
+                    <li><a href="#favorites">Favorites</a></li>
+                    <div class="dropdown">
+                        <li><a onclick="myFunction()" class="dropbtn" href="#Genre">Genre</a></li>
+                        <div id="myDropdown" class="dropdown-content">
+                          <a href="#g1">Drama</a>
+                          <a href="#g2">Animation</a>
+                          <a href="#g3">Comedy</a>
+                          <a href="#g4">Sci-Fi & Fantasy</a>
+                          <a href="#g5">Action & Adventure</a>
+                          <a href="#g6">Crime</a>
+                          <a href="#g7">Mystery</a>
+                          <a href="#g8">Reality</a>
+                          <a href="#g9">Family</a>
+                          <a href="#g10">News</a>
+                        </div>
+                    </div>                   
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button id="signupBtn" onclick="openModal('signupModal')">Sign Up</button>
+                <button id="loginBtn" onclick="openModal('loginModal')">Login</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" id="movieContainer">
+        <!-- Movie cards will be dynamically added here -->
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="email">Email:</label>
+                <input type="email" id="signupEmail" required><br>
+                <label for="password">Password:</label>
+                <input type="password" id="signupPassword" required>
+
+                <button type="button" onclick="signUp()">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="email">Email:</label>
+                <input type="email" id="loginEmail" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="loginPassword" required>
+
+                <button type="button" onclick="login()">Login</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+    </script>
+        
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
